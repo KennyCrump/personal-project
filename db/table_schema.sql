@@ -11,7 +11,7 @@ DROP TABLE IF EXISTS time_slot;
 create table time_slot (
     slot_id SERIAL PRIMARY KEY,
     date VARCHAR(20),
-    time VARCHAR(20),
+    time TIME,
     blocked VARCHAR(10),
     appt_id VARCHAR(8),
     task_id VARCHAR(8)

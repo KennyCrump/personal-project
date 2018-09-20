@@ -39,6 +39,7 @@ app.use(session({
 //   })
 
 app.post('/api/time/add', sc.addTimeSlot)
+app.get('/api/time/day', sc.getDay)
 
 
 

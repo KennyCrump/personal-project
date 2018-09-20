@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './App.css';
 
 import Nav from './components/Nav/Nav'
+import AddTime from './components/Schedule/AddTime'
+import DisplayDay from './components/Schedule/DisplayDay'
 import Schedule from './components/Schedule/Schedule'
 
 class App extends Component {
@@ -9,7 +11,9 @@ class App extends Component {
     return (
       <div className="App">
         <Nav />
-        <Schedule />
+        <AddTime />
+        <DisplayDay />
+        <Schedule/>
       </div>
     );
   }
