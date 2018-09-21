@@ -12,12 +12,18 @@ class DisplayDay extends Component{
     }
 
     componentDidMount(){
-        let date = encodeURI('09/24/18')
+        let date = encodeURI(this.props.date)
         axios.get(`/api/time/day?date=${date}`).then(res => {
             this.setState({
                 timeSlots: res.data
             })
         })
+    }
+    componentDidUpdate(prevProps){
+        console.log('Prev Props: ', prevProps.state)
+        // if(this.props.date !== prevProps.date){
+        //     this.props.match.history.push()
+        // }
     }
 
 
