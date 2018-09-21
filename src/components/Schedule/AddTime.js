@@ -78,14 +78,19 @@ class AddTime extends Component{
         const timeSlots = this.addTimeSlots()
         console.log('DATE RANGE: ', dateRange)
         console.log('TIMESLOTS: ', timeSlots)
+
+        let promiseArr =[]
         for(let i = 0; i < dateRange.length; i++){
             for(let j = 0; j < timeSlots.length; j++){
                 console.log(dateRange[i], timeSlots[j])
-                axios.post('/api/time/add', {date: dateRange[i], time: timeSlots[j]}).then(res =>{
+                promiseArr.push(axios.post('/api/time/add', {date: dateRange[i], time: timeSlots[j]}).then(res =>{
                     console.log('slot added')
-                })
+                }))
             }
         }
+        console.log(promiseArr)
+        Promise.all(promiseArr).then(()=> console.log('hello')||this.props.updateToggle())
+        .catch(err => console.log(err))
         // axios.post
     }
 
@@ -93,17 +98,13 @@ class AddTime extends Component{
 
     setEndTime = time => this.setState({ endTime: time })
 
-    // onChange(value) {
-    //     console.log("time: ", value && value.format('h:mm a'));
-    //   }
-
     render(){
         console.log(this.state)
         return(
             <div className='datePicker'>
                 Add New Day To Schedule
                 <DateRange
-                format="MM/DD/YY"
+                    format="MM/DD/YY"
                     onInit={this.handleSelect}
                     onChange={this.handleSelect}
                     calendars={1}
@@ -112,7 +113,6 @@ class AddTime extends Component{
                 onChange={() => this.setState({includeWeekends: !this.state.includeWeekends})}
                 /> Include Weekends <br />
 
-                {/* <button onClick={this.addDates}>Add Days</button>                 */}
                 <br />
                 <TimePicker
                     onChange={this.setStartTime}
@@ -127,8 +127,9 @@ class AddTime extends Component{
                         <option value={30}>30 intervals</option>
                         <option value={60}>1 hour intervals</option>
                     </select>
-                    {/* <button onClick={() => this.addTimeSlots(15)}>Add Time Slots</button> */}
-                    <button onClick={this.createTimeSlots}>Make Time Slots Officially</button>
+                    <br/>
+                    <button onClick={this.createTimeSlots}>Create Time Slots</button>
+                    <button onClick={this.props.modalToggle}>Cancel</button>
             </div>
         )
     }

@@ -20,27 +20,34 @@ class DisplayDay extends Component{
         })
     }
     componentDidUpdate(prevProps){
-        console.log('Prev Props: ', prevProps.state)
-        // if(this.props.date !== prevProps.date){
-        //     this.props.match.history.push()
-        // }
+
+        if(this.props.updateToggle !== prevProps.updateToggle){
+            let date = encodeURI(this.props.date)
+            axios.get(`/api/time/day?date=${date}`).then(res => {
+                this.setState({
+                    timeSlots: res.data
+                 })
+        })
+        }
     }
 
 
     render(){
         let slotList = this.state.timeSlots.map(slot => {
             return <TimeSlot 
-                    key={slot.slot_id}
-                    slotId={slot.slot_id}
-                    date={slot.date}
-                    time={slot.time_formatted}
-                    blocked={slot.blocked}
-                    apptId={slot.appt_id}
-                    taskId={slot.task_id}
-                    />
+            key={slot.slot_id}
+            slotId={slot.slot_id}
+            date={slot.date}
+            time={slot.time_formatted}
+            blocked={slot.blocked}
+            apptId={slot.appt_id}
+            taskId={slot.task_id}
+        />
+                
         })
         return(
-            <div>
+            <div className='dayView'>
+            <h4>{this.props.date}</h4>
                 {slotList}
             </div>
         )
