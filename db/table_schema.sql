@@ -13,6 +13,24 @@ create table time_slot (
     date VARCHAR(20),
     time TIME,
     blocked VARCHAR(10),
-    appt_id VARCHAR(8),
-    task_id VARCHAR(8)
+    appt_id INTEGER,
+    task_id INTEGER
+);
+
+-- DROP TABLE IF EXISTS slot_junction;
+-- CREATE TABLE slot_junction (
+--   id SERIAL PRIMARY KEY,
+--   slot_id INTEGER REFERENCES time_slot(slot_id),
+--   appt_id INTEGER,
+--   task_id INTEGER
+-- );
+
+DROP TABLE IF EXISTS appointments;
+CREATE TABLE appointments (
+  appt_id SERIAL PRIMARY KEY,
+  user_id INTEGER REFERENCES users(user_id),
+  slot_id INTEGER REFERENCES time_slot(slot_id),
+  summary VARCHAR(600),
+  notes VARCHAR(1000),
+  total DECIMAL
 );

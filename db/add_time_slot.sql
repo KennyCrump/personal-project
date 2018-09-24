@@ -1,2 +1,4 @@
 INSERT INTO time_slot (date, time)
 VALUES (${date}, ${time})
+
+-- HOW TO CREATE AN ITEM IN JUNCTION TABLE EVERY TIME AN ITEM IS ADDED

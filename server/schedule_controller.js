@@ -4,7 +4,7 @@ module.exports = {
         let {date, time} = req.body
         db.find_time_slot({date, time}).then(response => {
             if(!response[0]){
-                db.add_time_slot({date, time}).then(response => {
+                db.add_time_slot({date, time}).then(resolve => {
                     res.status(200).send(console.log('Slot Added'))
                 })
             }else{
@@ -21,6 +21,13 @@ module.exports = {
             res.status(200).send(timeSlots)
         }).catch( err => {
             res.status(500).send(err)
+        })
+    },
+    addAppt: (req, res) => {
+        const db = req.app.get('db')
+        let{user_id, slot_id, summary} = req.body
+        db.create_appt({user_id, slot_id, summary}).then(resolve => {
+            res.status(200).send(console.log('appointment created'))
         })
     }
 }
