@@ -27,7 +27,7 @@ module.exports = {
         const db = req.app.get('db')
         let{user_id, slot_id, summary} = req.body
         db.create_appt({user_id, slot_id, summary}).then(resolve => {
-            res.status(200).send(console.log('appointment created'))
+            res.status(200).send(resolve)
         })
     }
 }

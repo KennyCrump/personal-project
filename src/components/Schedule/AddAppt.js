@@ -15,11 +15,14 @@ class AddAppt extends Component{
         let {slotId: slot_id} = this.props;
         axios.post('/api/appt/add', {user_id, summary, slot_id})
             .then(res => {
-                this.props.modalToggle()
+                console.log('RES', res)
+                this.props.updateSlotInfo(res.data[0])
+                this.props.updateModalToggle()
             })
     }
 
     render(){
+        console.log('add state', this.state)
         return(
             <div>
                 enter user ID: 
@@ -29,8 +32,10 @@ class AddAppt extends Component{
                 <input type="text"
                     onChange={e => this.setState({summary: e.target.value})}/>
                 <button onClick={this.addAppt}>Add Appointment</button>
-                <button onClick={() => this.props.modalToggle()}>Cancel</button>
+                <button onClick={() => this.props.updateModalToggle()}>Cancel</button>
             </div>
         )
     }
 }
+
+export default AddAppt

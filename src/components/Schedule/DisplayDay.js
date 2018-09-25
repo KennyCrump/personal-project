@@ -7,7 +7,8 @@ class DisplayDay extends Component{
     constructor(props){
         super(props)
         this.state={
-            timeSlots: []
+            timeSlots: [],
+            apptAddedToggle: false
         } 
     }
 
@@ -20,7 +21,7 @@ class DisplayDay extends Component{
         })
     }
     componentDidUpdate(prevProps){
-
+        console.log('propstate', prevProps)
         if(this.props.updateToggle !== prevProps.updateToggle){
             let date = encodeURI(this.props.date)
             axios.get(`/api/time/day?date=${date}`).then(res => {
@@ -31,8 +32,13 @@ class DisplayDay extends Component{
         }
     }
 
+    updateApptAddedToggle = () => {
+        this.setState({apptAddedToggle: !this.state.apptAddedToggle})
+    }
+
 
     render(){
+
         let slotList = this.state.timeSlots.map(slot => {
             return <TimeSlot 
             key={slot.slot_id}
@@ -42,6 +48,8 @@ class DisplayDay extends Component{
             blocked={slot.blocked}
             apptId={slot.appt_id}
             taskId={slot.task_id}
+            apptAddedToggle={this.state.apptAddedToggle}
+            updateApptAddedToggle={this.updateApptAddedToggle}
         />
                 
         })
