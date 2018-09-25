@@ -1,0 +1,1 @@
+select user_id, user_name, email, picture from users;

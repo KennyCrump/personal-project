@@ -15,7 +15,6 @@ class AddAppt extends Component{
         let {slotId: slot_id} = this.props;
         axios.post('/api/appt/add', {user_id, summary, slot_id})
             .then(res => {
-                console.log('RES', res)
                 this.props.updateSlotInfo(res.data[0])
                 this.props.updateModalToggle()
             })

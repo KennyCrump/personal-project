@@ -3,8 +3,10 @@ const express = require('express')
 const massive = require('massive')
 const session = require('express-session')
 const axios = require('axios')
+
 const ac = require('./auth_countroller')
 const sc = require('./schedule_controller')
+const uc = require('./user_controller')
 
 const app = express()
 
@@ -41,6 +43,9 @@ app.use(session({
 app.post('/api/time/add', sc.addTimeSlot)
 app.get('/api/time/day', sc.getDay)
 app.post('/api/appt/add', sc.addAppt)
+
+app.get('/api/users', uc.getAllUsers)
+app.get('/api/user/:id', uc.getUser)
 
 
 
