@@ -45,7 +45,7 @@ app.get('/api/time/day', sc.getDay)
 app.post('/api/appt/add', sc.addAppt)
 
 app.get('/api/users', uc.getAllUsers)
-app.get('/api/user/:id', uc.getUser)
+app.get('/api/user/:id', uc.getUserProfile)
 
 
 

@@ -6,11 +6,15 @@ module.exports ={
             res.status(200).send(users)
         })
     },
-    getUser: (req, res) => {
+    getUserProfile: (req, res) => {
         const db = req.app.get('db')
         const {id} = req.params
-        db.get_user({user_id: id}).then(user => {
+        db.get_user_profile({user_id: id}).then(user => {
             res.status(200).send(user)
         })
     }
+    // getProfile: (req, res) => {
+    //     const db = req.app.get('db')
+    //     const {id}
+    // }
 }

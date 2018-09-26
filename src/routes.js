@@ -3,10 +3,11 @@ import React from 'react'
 
 import Users from './components/Users/Users'
 import Schedule from './components/Schedule/Schedule'
+import Profile from './components/Profile/Profile'
 
 export default <Switch>
     <Route exact path='/' component={Schedule}/>
     <Route path='/users' component={Users}/>
-
+    <Route path ='/user/:id' component={Profile} />
 
 </Switch>
