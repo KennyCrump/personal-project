@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import './Profile.css'
+
+import Appointment from './Appointment'
 
 class Profile extends Component{
     constructor(props){
@@ -31,8 +34,34 @@ class Profile extends Component{
 
     render(){
         console.log('Profile state: ', this.state)
+        let {user_name, picture, email, user_id, userAppts} = this.state
+        let apptList = userAppts.map(appt => {
+            return <Appointment 
+                        key={appt.appt_id}
+                        apptId={appt.apptId}
+                        slotId={appt.slot_id}  
+                        summary={appt.summary}
+                        date={appt.date}
+                        time={appt.time_formatted}
+                        notes={appt.notes}
+                        username={appt.user_name}
+                        userId={appt.user_id}
+                        total={appt.total}
+
+                        />
+        })
         return(
-            <div>profile page</div>
+            <div>profile page
+                <div>User Info:
+                    <img src={picture} alt="profile_picture"/>
+                    <p>{user_name}</p>  
+                    <p>{email}</p>
+                </div>
+                <div>
+                    {apptList}
+                </div>
+
+            </div>
         )
     }
 }
