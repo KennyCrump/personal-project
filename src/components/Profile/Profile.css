@@ -1,0 +1,24 @@
+.profilePagePicture{
+    height: 200px;
+    width: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.appointmentsList{
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 60px;
+}
+
+.appointmentWrapper{
+    width: 250px;
+    border: 1px blue solid;
+    margin: 10px;
+}
+.appointmentWrapper:hover{
+    /* border: 1px solid aqua; */
+    box-shadow: 5px 3px 3px #00000088;
+    background-color: #a1fdf188;
+    cursor: pointer;
+}

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import moment from 'moment'
 import './Profile.css'
 
 import Appointment from './Appointment'
@@ -14,7 +15,6 @@ class Profile extends Component{
             user_id: '',
             userAppts: []
         }
-
     }
 
     componentDidMount(){
@@ -34,11 +34,14 @@ class Profile extends Component{
 
     render(){
         console.log('Profile state: ', this.state)
-        let {user_name, picture, email, user_id, userAppts} = this.state
-        let apptList = userAppts.map(appt => {
+        let {user_name, picture, email, userAppts} = this.state
+        let today = moment()
+        let upcomingAppts = userAppts.filter(appt => moment(today).isBefore(moment(appt.date, 'MM/DD/YY')) || moment(today).isSame(moment(appt.date, 'MM/DD/YY')))
+        let upcomingApptsList = upcomingAppts.map(appt => {
             return <Appointment 
                         key={appt.appt_id}
-                        apptId={appt.apptId}
+                        upcoming={true}
+                        apptId={appt.appt_id}
                         slotId={appt.slot_id}  
                         summary={appt.summary}
                         date={appt.date}
@@ -47,18 +50,40 @@ class Profile extends Component{
                         username={appt.user_name}
                         userId={appt.user_id}
                         total={appt.total}
-
+                        />
+        })
+        let pastAppts = userAppts.filter(appt => moment(today).isAfter(moment(appt.date, 'MM/DD/YY')))
+        let pastApptsList = pastAppts.map(appt => {
+            return <Appointment 
+                        key={appt.appt_id}
+                        upcoming={false}
+                        apptId={appt.appt_id}
+                        slotId={appt.slot_id}  
+                        summary={appt.summary}
+                        date={appt.date}
+                        time={appt.time_formatted}
+                        notes={appt.notes}
+                        username={appt.user_name}
+                        userId={appt.user_id}
+                        total={appt.total}
                         />
         })
         return(
-            <div>profile page
-                <div>User Info:
-                    <img src={picture} alt="profile_picture"/>
+            <div>
+                <div>
+                    <img className='profilePagePicture' src={picture} alt="profile_picture"/>
                     <p>{user_name}</p>  
                     <p>{email}</p>
                 </div>
                 <div>
-                    {apptList}
+                    <h4>Upcoming Appointments</h4>
+                    <div className='appointmentsList'>
+                        {upcomingApptsList}
+                    </div>
+                    <h4>Past Appointments</h4>
+                    <div className='appointmentsList'>
+                        {pastApptsList}
+                    </div>
                 </div>
 
             </div>

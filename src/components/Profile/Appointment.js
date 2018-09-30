@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import axios from 'axios'
 
 class Appointment extends Component{
     constructor(props){
@@ -7,12 +8,16 @@ class Appointment extends Component{
             summary: '',
             notes: '',
             total: '',
-            editToggle: false
+            editToggle: false,
+            modalToggle: false
         }
     }
     
     componentDidMount(){
-        let {apptID, slotId, summary, date, time, notes, username, userId, total} = this.props
+        let {summary, notes, total} = this.props
+        if(summary === null) summary = ''
+        if(notes === null) notes = ''
+        if(total === null) total = 0
         this.setState({summary, notes, total})
     }
 
@@ -20,42 +25,48 @@ class Appointment extends Component{
         this.setState({editToggle: !this.state.editToggle})
     }
 
+    handleModalToggle = () => {
+        this.setState({modalToggle: !this.state.modalToggle})
+    }
+
+    saveUpdatedAppt = () => {
+        let {summary, notes, total} = this.state
+        axios.put(`/api/appt/${this.props.apptId}`, {summary, notes, total})
+            .then(() => this.handleEditToggle())
+    }
+
     render(){
-        let {apptID, slotId, date, time, username, userId} = this.props
-        let {summary, notes, total, editToggle} = this.state
+        let {date, time, } = this.props //also on props: apptId, slotId, username, userId
+        let {summary, notes, editToggle} = this.state //also on state: total
         return(
-            <div>  
-                <div>   
-                    <hr/>
-                    <p>Date: {date}</p>
-                    <p>Time: {time}</p>
-                    {editToggle ?
-                        <div>
-                            <input type="text" 
-                                value={summary} 
-                                onChange={e => this.setState({summary: e.target.value})}/>
-                                <br/>
-                            <input type="text"
-                                value={notes}
-                                onChange={e => this.setState({notes: e.target.value})}/>
-                        </div>
-                        :
-                        <div>
-                            <p>Summary: {summary}</p>
-                            <p>Notes: {notes}</p>
-                        </div>
-                    }
-                    <button onClick={this.handleEditToggle}>
-                    {editToggle ? 
-                        'Save'
-                        :
-                        'Edit'
-                    }
-                    </button>
-                    <hr/>
+            // <button>
+                <div >  
+                    <div className='appointmentWrapper' onClick={this.handleModalToggle}>   
+                        <p>Date: {date}</p>
+                        <p>Time: {time}</p>
+                        {editToggle ?
+                            <div>
+                                <p>Summary: </p>
+                                <input type="text" 
+                                    value={summary} 
+                                    onChange={e => this.setState({summary: e.target.value})}/>
+                                <p>Notes: </p>
+                                <input type="text"
+                                    value={notes}
+                                    onChange={e => this.setState({notes: e.target.value})}/>
+                                <button onClick={this.saveUpdatedAppt}>Save</button>
+                            </div>
+                            :
+                            <div>
+                                <p>Summary: {summary}</p>
+                                <p>Notes: {notes}</p>
+                                <button onClick={this.handleEditToggle}>Edit</button>
+                            </div>
+                        }
+                    </div>
+                   
                 </div>
-                
-            </div>
+            // </button>
         )
     }
 }

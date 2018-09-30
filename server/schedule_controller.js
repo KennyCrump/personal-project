@@ -25,9 +25,18 @@ module.exports = {
     },
     addAppt: (req, res) => {
         const db = req.app.get('db')
-        let{user_id, slot_id, summary} = req.body
+        let {user_id, slot_id, summary} = req.body
         db.create_appt({user_id, slot_id, summary}).then(resolve => {
             res.status(200).send(resolve)
         })
+    },
+    updateAppt: (req, res) => {
+        const db = req.app.get('db')
+        let {appt_id} = req.params
+        let {summary, notes, total} = req.body
+        db.update_appt({appt_id, summary, notes, total}).then(resolve => {
+            res.status(200).send(console.log('appt updated in DB'))
+        })
     }
+
 }
