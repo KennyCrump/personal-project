@@ -26,17 +26,24 @@ module.exports = {
     addAppt: (req, res) => {
         const db = req.app.get('db')
         let {user_id, slot_id, summary} = req.body
-        db.create_appt({user_id, slot_id, summary}).then(resolve => {
-            res.status(200).send(resolve)
+        db.create_appt({user_id, slot_id, summary}).then(appt => {
+            res.status(200).send(appt)
         })
     },
     updateAppt: (req, res) => {
         const db = req.app.get('db')
         let {appt_id} = req.params
         let {summary, notes, total} = req.body
-        db.update_appt({appt_id, summary, notes, total}).then(resolve => {
+        db.update_appt({appt_id, summary, notes, total}).then(() => {
             res.status(200).send(console.log('appt updated in DB'))
         })
+    },
+    getApptsForDay: (req, res) => {
+        const db = req.app.get('db')
+        let {date} = req.query
+        date = decodeURI(date)
+        db.get_appts_for_day({date}).then(appts => {
+            res.status(200).send(appts)
+        })
     }
-
 }

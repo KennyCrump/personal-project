@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import axios from 'axios'
+import moment from 'moment'
 
 import TimeSlot from './TimeSlot'
 
@@ -22,20 +23,20 @@ class DisplayDay extends Component{
     }
     componentDidUpdate(prevProps){
         console.log('propstate', prevProps)
-        if(this.props.updateToggle !== prevProps.updateToggle){
+        if(this.props.updateToggle !== prevProps.updateToggle || this.props.date !== prevProps.date){
             let date = encodeURI(this.props.date)
             axios.get(`/api/time/day?date=${date}`).then(res => {
                 this.setState({
                     timeSlots: res.data
                  })
-        })
+            })
         }
+
     }
 
     updateApptAddedToggle = () => {
         this.setState({apptAddedToggle: !this.state.apptAddedToggle})
     }
-
 
     render(){
 
@@ -55,7 +56,8 @@ class DisplayDay extends Component{
         })
         return(
             <div className='dayView'>
-            <h4>{this.props.date}</h4>
+            <h3>{this.props.date}</h3>
+            <h4>{moment(this.props.date, 'MM/DD/YY').format('dddd')}</h4>
                 {slotList}
             </div>
         )

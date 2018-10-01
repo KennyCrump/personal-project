@@ -12,6 +12,14 @@ module.exports ={
         db.get_user_profile({user_id: id}).then(user => {
             res.status(200).send(user)
         })
+    },
+    getUsersForDay: (req, res) => {
+        const db = req.app.get('db')
+        let {date} = req.query
+        date = decodeURI(date)
+        db.get_users_for_day({date}).then(users => {
+            res.status(200).send(users)
+        }).catch(err => res.status(500).send(err))
     }
     // getProfile: (req, res) => {
     //     const db = req.app.get('db')

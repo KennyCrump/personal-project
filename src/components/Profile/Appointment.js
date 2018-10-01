@@ -36,14 +36,21 @@ class Appointment extends Component{
     }
 
     render(){
-        let {date, time, username} = this.props //also on props: apptId, slotId, userId
+        let {date, time, username, picture} = this.props //also on props: apptId, slotId, userId
         let {summary, notes, total, editToggle, modalToggle} = this.state
         console.log(this.state)
         return(
             // <button>
                 <div >  
                     <div className='appointmentWrapper' onClick={this.handleModalToggle}>   
-                        <p>Date: {date}</p>
+                        {picture ? 
+                            <div>
+                                <img id='miniProfilePic' src={picture} alt=""/>
+                                <h4>{username}</h4>
+                            </div>
+                            :
+                            <p>Date: {date}</p>
+                        }
                         <p>Time: {time}</p>
                         {editToggle ?
                             <div>
