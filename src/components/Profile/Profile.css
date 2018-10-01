@@ -22,3 +22,19 @@
     background-color: #a1fdf188;
     cursor: pointer;
 }
+.appointmentModalWrapper{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #56ffe888;
+}
+.appointmentModal{
+    background-color: blanchedalmond;
+    height: 75vh;
+    width: 75vw;
+}

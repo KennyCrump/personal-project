@@ -36,8 +36,9 @@ class Appointment extends Component{
     }
 
     render(){
-        let {date, time, } = this.props //also on props: apptId, slotId, username, userId
-        let {summary, notes, editToggle} = this.state //also on state: total
+        let {date, time, username} = this.props //also on props: apptId, slotId, userId
+        let {summary, notes, total, editToggle, modalToggle} = this.state
+        console.log(this.state)
         return(
             // <button>
                 <div >  
@@ -54,17 +55,54 @@ class Appointment extends Component{
                                 <input type="text"
                                     value={notes}
                                     onChange={e => this.setState({notes: e.target.value})}/>
-                                <button onClick={this.saveUpdatedAppt}>Save</button>
+                                {/* <button onClick={this.saveUpdatedAppt}>Save</button> */}
                             </div>
                             :
                             <div>
                                 <p>Summary: {summary}</p>
                                 <p>Notes: {notes}</p>
-                                <button onClick={this.handleEditToggle}>Edit</button>
+                                {/* <button onClick={this.handleEditToggle}>Edit</button> */}
                             </div>
                         }
                     </div>
-                   
+                    {modalToggle ?
+                        <div className='appointmentModalWrapper'>
+                            <div className='appointmentModal'>
+                                <h2>Appointment For {username}</h2>
+                                <h3>{date} at {time}</h3>
+                                {editToggle ?
+                                <div>
+                                    <h4>Appointment Summary</h4>
+                                    <input value={summary} 
+                                        onChange={e => this.setState({summary: e.target.value})}
+                                        type='text'/>
+                                    <h4>Additional Notes</h4>
+                                    <input value={notes} 
+                                        onChange={e => this.setState({notes: e.target.value})}
+                                        type='text'/>
+                                    <h4>Total Cost: $</h4>
+                                    <input value={total} 
+                                        onChange={e => this.setState({total: e.target.value})}
+                                        type='text'/>
+                                    <button onClick={this.handleEditToggle}>Cancel</button>
+                                    <button onClick={this.saveUpdatedAppt}>Save Changes</button>
+                                </div>  
+                                :
+                                <div>
+                                    <h4>Appointment Summary</h4>
+                                    <p>{summary}</p>
+                                    <h4>Additional Notes</h4>
+                                    <p>{notes}</p>
+                                    <h4>Total Cost: ${total}</h4>
+                                    <button onClick={this.handleModalToggle}>Back</button>
+                                    <button onClick={this.handleEditToggle}>Edit</button>
+                                </div>
+                                }
+                            </div>
+                        </div>
+                    :
+                        null
+                    }
                 </div>
             // </button>
         )
