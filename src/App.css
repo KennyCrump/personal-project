@@ -1,5 +1,12 @@
+body{
+  background-color: beige;
+}
 .App {
   text-align: center;
+  background-color: beige;
+}
+Link{
+  text-decoration: none;
 }
 .datePicker{
   margin-top: 100px;

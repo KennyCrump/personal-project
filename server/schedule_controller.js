@@ -17,16 +17,24 @@ module.exports = {
         let {date} = req.query
         date = decodeURI(date)
         console.log(date)
-        db.get_day({date}).then(timeSlots => {
-            res.status(200).send(timeSlots)
-        }).catch( err => {
-            res.status(500).send(err)
-        })
+        if(req.session.user.admin === 'admin'){
+            db.get_day_admin({date}).then(timeSlots => {
+                res.status(200).send(timeSlots)
+            }).catch( err => {
+                res.status(500).send(err)
+            })
+        }else{
+            db.get_day_admin({date}).then(timeSlots => {
+                res.status(200).send(timeSlots)
+            }).catch( err => {
+                res.status(500).send(err)
+            })
+        }
     },
     addAppt: (req, res) => {
         const db = req.app.get('db')
-        let {user_id, slot_id, summary} = req.body
-        db.create_appt({user_id, slot_id, summary}).then(appt => {
+        let {user_id, slot_id, summary, notes} = req.body
+        db.create_appt({user_id, slot_id, summary, notes}).then(appt => {
             res.status(200).send(appt)
         })
     },
@@ -44,6 +52,13 @@ module.exports = {
         date = decodeURI(date)
         db.get_appts_for_day({date}).then(appts => {
             res.status(200).send(appts)
+        })
+    },
+    deleteAppt: (req, res) => {
+        const db = req.app.get('db')
+        const {appt_id} = req.params
+        db.delete_appt({appt_id}).then(()=> {
+            res.status(200).send(console.log('appt deleted from DB'))
         })
     }
 }

@@ -2,7 +2,10 @@
     display: flex;
 }
 .dayView{
-    width: 20vw;
+    width: 15vw;
+}
+.displayDateText{
+    margin: 5px 0 5px 0;
 }
 .slotView{
     font-size: 12px;
@@ -19,7 +22,96 @@
     align-items: center;
     background-color: rgba(127, 255, 212, 0.37)
 }
+
 .datePicker{
     background-color: blanchedalmond;
     padding: 50px;
+}
+.dayView{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.addApptModalWrapper{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(240, 248, 255, 0.596);
+}
+.apptModalContent{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.addApptModal{
+    position: relative;
+    justify-content: space-between;
+    height: 60vh;
+    width: 60vw;
+    background-color: #b0e9ff;
+    border: #73afc7 1px solid;
+    border-radius: 15px;
+}
+#xButton{
+    border: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: transparent;
+    margin-top: 5px;
+    margin-right: 3px;
+    font-size: 20px;
+    color: rgb(85, 85, 85);
+}
+#xButton:hover{
+    cursor: pointer;
+}
+.clientSlotView{
+    width: 100px;
+    height: 50px;
+    margin-bottom: 15px;
+    border: 1px;
+    background-color: azure;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+}
+.blocked{
+    background-color: lightgrey;
+    border: 1px solid #b3b3b3;
+}
+.open{
+    background-color: aquamarine;
+    border: #00e96d 1px solid
+}
+.open:hover{
+    background-color: #00e96d;
+    border: aquamarine 1px solid;
+    cursor: pointer;
+    box-shadow: #b3b3b3 2px 2px 2px;
+}
+.userSelector{
+    margin-right: 30px;
+}
+#userListSearch{
+    height: 400px;
+    overflow-y: auto;
+    margin-top: 5px;
+}
+.selectedUser{
+    height: 102px;
+    border: 1px solid rgba(23, 92, 221, 0.322)
+}
+.changeApptInfo{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    width: 100%;
 }

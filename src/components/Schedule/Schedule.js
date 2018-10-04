@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import moment from 'moment'
+import {connect} from 'react-redux'
 
 import DisplayDay from './DisplayDay';
 import AddTime from './AddTime'
@@ -76,7 +77,11 @@ class Schedule extends Component{
                 {this.state.startOfWeek} - {this.state.endOfWeek}
                 <button onClick={() => this.moveWeek(7)}>Next Week</button>
                 <br/>
-                <button onClick={this.modalToggle}>Add Time Slots</button>
+                {this.props.user.admin === 'admin' ?
+                    <button onClick={this.modalToggle}>Add Time Slots</button>
+                :
+                    null
+                }
                 <div className='weekView'>
                     {weekView}
                 </div>
@@ -95,4 +100,11 @@ class Schedule extends Component{
     }
 }
 
-export default Schedule
+function mapFromStateToProps({user}){
+    return{
+        user
+    }
+}
+
+
+export default connect(mapFromStateToProps, {})(Schedule)

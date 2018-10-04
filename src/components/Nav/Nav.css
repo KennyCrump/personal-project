@@ -1,0 +1,31 @@
+.navBar{
+    width: 100vw;
+    background-color: rgb(37, 37, 110);
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.navLinks{
+    width: 40vw;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 30px;
+    margin-top: 30px;
+
+}
+.navTabs{
+    margin-right: 50px;
+    text-decoration: none;
+}
+.logo{
+    font-size: 30px;
+    color: whitesmoke;
+    margin-left: 50px;
+}
+.linkText{
+    font-size: 24px;
+    color: whitesmoke;
+
+}

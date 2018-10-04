@@ -8,6 +8,7 @@
     width: 50px;
     height: 50px;
     border-radius: 50%;
+    object-fit: cover;
 }
 .appointmentsList{
     display: flex;
@@ -41,4 +42,19 @@
     background-color: blanchedalmond;
     height: 75vh;
     width: 75vw;
+}
+.deleteModalWrapper{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+.deleteModal{
+    height: 40vh;
+    width: 40vw;
+    background-color: bisque;
 }

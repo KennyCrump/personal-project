@@ -30,11 +30,20 @@ module.exports = {
         let foundUser = await db.find_user([sub])
         if (foundUser[0]) {
           req.session.user = foundUser[0];
+          // console.log(req.session.user.admin)
         } else {
           let createdUser = await db.create_user([name, email, picture, sub]);
           // [ {name, email, picture, auth_id} ]
           req.session.user = createdUser[0]
         }
-        res.redirect('/')
+        if(req.session.user.admin === 'admin'){
+          res.redirect('/#/admin/home')
+        }else{
+          res.redirect('/')
+        }
+    },
+    logout: (req, res) => {
+      req.session.destroy();
+      console.log('SessionDestroyed')
     }
 }

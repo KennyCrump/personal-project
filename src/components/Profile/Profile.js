@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import moment from 'moment'
 import './Profile.css'
+import {connect} from 'react-redux'
 
 import Appointment from './Appointment'
 
@@ -18,18 +19,39 @@ class Profile extends Component{
     }
 
     componentDidMount(){
-        axios.get(`/api/user/${this.props.match.params.id}`)
-            .then(user => {
-                console.log(user)
-                let userInfo = user.data[0]     //single object for pulling user Info
-                let userAppts = user.data       //Array of all appts
-                this.setState({
-                    user_name: userInfo.user_name,
-                    picture: userInfo.picture,
-                    email: userInfo.email,
-                    user_id: userInfo.user_id,
-                    userAppts: userAppts})
-            })
+        if(this.props.user.admin === 'admin'){
+            axios.get(`/api/user/${this.props.match.params.id}`)
+                .then(user => {
+                    console.log(user)
+                    let userInfo = user.data[0]     //single object for pulling user Info
+                    let userAppts = user.data       //Array of all appts
+                    this.setState({
+                        user_name: userInfo.user_name,
+                        picture: userInfo.picture,
+                        email: userInfo.email,
+                        user_id: userInfo.user_id,
+                        userAppts: userAppts})
+                })
+        }else{
+            axios.get(`/api/user/${this.props.user.user_id}`)
+                .then(user => {
+                    console.log(user)
+                    let userInfo = user.data[0]     //single object for pulling user Info
+                    let userAppts = user.data       //Array of all appts
+                    this.setState({
+                        user_name: userInfo.user_name,
+                        picture: userInfo.picture,
+                        email: userInfo.email,
+                        user_id: userInfo.user_id,
+                        userAppts: userAppts})
+                })
+        }
+    }
+    deleteAppt = (appt_id) =>{
+        let indexOfApptToDelete = this.state.userAppts.findIndex(appt => appt.appt_id === appt_id)
+        let newApptsArr = this.state.userAppts.slice('')
+        newApptsArr.splice(indexOfApptToDelete, 1)
+        this.setState({userAppts: newApptsArr})
     }
 
     render(){
@@ -37,7 +59,7 @@ class Profile extends Component{
         let {user_name, picture, email, userAppts} = this.state
         let today = moment()
         let upcomingAppts = userAppts.filter(appt => moment(today).isBefore(moment(appt.date, 'MM/DD/YY')) || moment(today).isSame(moment(appt.date, 'MM/DD/YY')))
-        let upcomingApptsList = upcomingAppts.map(appt => {
+        let upcomingApptsList = upcomingAppts.reverse().map(appt => {
             return <Appointment 
                         key={appt.appt_id}
                         upcoming={true}
@@ -50,6 +72,7 @@ class Profile extends Component{
                         username={appt.user_name}
                         userId={appt.user_id}
                         total={appt.total}
+                        deleteAppt={this.deleteAppt}
                         />
         })
         let pastAppts = userAppts.filter(appt => moment(today).isAfter(moment(appt.date, 'MM/DD/YY')))
@@ -90,5 +113,10 @@ class Profile extends Component{
         )
     }
 }
+function mapFromStoreToProps({user}){
+    return {
+        user
+    }
+}
 
-export default Profile
+export default connect(mapFromStoreToProps,{})(Profile)

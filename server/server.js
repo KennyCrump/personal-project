@@ -29,6 +29,7 @@ app.use(session({
   }))
 
   app.get('/auth/callback', ac.login)
+  app.post('/auth/logout', ac.logout)
 //   app.use((req, res, next) => {
 //     if (ENVIRONMENT === 'dev') {
 //       req.app.get('db').set_data().then(userData => {
@@ -45,9 +46,11 @@ app.get('/api/time/day', sc.getDay)
 
 app.post('/api/appt/add', sc.addAppt)
 app.put('/api/appt/:appt_id', sc.updateAppt)
+app.delete('/api/appt/:appt_id', sc.deleteAppt)
 app.get('/api/appt/day', sc.getApptsForDay) //Pulls date from query
 
 app.get('/api/users', uc.getAllUsers)
+app.get('/api/user/data', uc.getUserData) //Sets redux to what user is in session
 app.get('/api/user/:id', uc.getUserProfile)
 app.get('/api/users/day', uc.getUsersForDay) //Pulls date from query
 

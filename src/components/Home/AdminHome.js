@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import moment from 'moment'
 import axios from 'axios'
+import {Link} from 'react-router-dom'
 import './AdminHome.css'
 
 import DisplayDay from '../Schedule/DisplayDay'
@@ -47,19 +48,25 @@ class AdminHome extends Component{
         newDay = moment(newDay).add(day, 'd')
         this.setStateByDate(newDay.format('MM/DD/YY'))
         // this.setState({date: newDay.format('MM/DD/YY')})
-        
+    }
+
+    updateHomeToggle = () => {
+        let currentDate = this.state.date
+        this.setStateByDate(currentDate)
     }
 
     render(){
         console.log("home state: ", this.state);
         let {usersByDate, apptsByDate, date} = this.state
         let userList = usersByDate.map(user => {
-            return <DisplayUser 
-                        key={user.user_id}
-                        userId={user.user_id} 
-                        picture={user.picture}
-                        username={user.user_name}
-                    />
+            return  <Link className='linkToUser' to={`/user/${user.user_id}`}>
+                        <DisplayUser 
+                            key={user.user_id}
+                            userId={user.user_id} 
+                            picture={user.picture}
+                            username={user.user_name}
+                        />
+                    </Link>
         })
         let apptList = apptsByDate.map(appt => {
             return <Appointment 
@@ -81,17 +88,20 @@ class AdminHome extends Component{
             <div>
                 <div className='homeDateDisplay'>
                     <button onClick={() => this.changeDate(-1)}><h2>{'<'}</h2></button>
-                    {date === moment().format('MM/DD/YY') ?
-                        <h2>Today's Schedule</h2>
-                    :
-                        <h2>Schedule for {date}</h2>
-                    }
+                    <div className='dateDisplayText'>
+                        {date === moment().format('MM/DD/YY') ?
+                            <h2 className='dateDisplayText'>{` Today's Schedule `}</h2>
+                        :
+                            <h2 className='dateDisplayText'>{` Schedule for ${date} `}</h2>
+                        }
+                    </div>
                     <button onClick={() => this.changeDate(1)}><h2>{'>'}</h2></button>
                 </div>
                 <div className='adminHome'>
                     <div>
                         <DisplayDay 
-                            date={this.state.date}/>
+                            date={this.state.date}
+                            updateHomeToggle={this.updateHomeToggle}/>
                     </div>
                     <div>
                         <h3>Clients on Schedule</h3>

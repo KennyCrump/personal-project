@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import moment from 'moment'
 
 import AddAppt from './AddAppt'
 
@@ -12,7 +13,15 @@ class TimeSlot extends Component{
     }
 
     componentDidMount(){
-        this.setState({slotInfo: this.props.apptId})
+        let {time, date, apptId, user} = this.props
+        let timeSlot = `${date} ${time}`
+        console.log('time format', timeSlot)
+        this.setState({slotInfo: apptId})
+        if(user.admin !== 'admin'){
+            if(moment().isAfter(moment(timeSlot, 'MM/DD/YY h:mm A'))){
+                this.setState({slotInfo: 'Past'})
+            }
+        }
     }
 
     updateModalToggle = () => {
@@ -22,31 +31,70 @@ class TimeSlot extends Component{
     }
 
     updateSlotInfo = (apptSummary) => {
-        this.setState({slotInfo: apptSummary.appt_id})
+        this.setState({slotInfo: apptSummary.appt_id}, () => {
+            if(this.props.updateHomeToggle){
+                console.log('appt update: ', this.state.slotInfo)
+                this.props.updateHomeToggle()
+            }
+        } )
     }
 
     render(){
-        console.log('slot state', this.state)
+        let {date} = this.props
+        console.log('slot state', date)
         return(
-            <div className='slotView'> 
-                <p>{this.props.time}</p>
-                {this.state.slotInfo ? 
-                <p>{`Appointment: ${this.state.slotInfo}`}</p>
-                : 
-                <button onClick={this.updateModalToggle}>+</button>
+            <div>
+                {this.props.user.admin === 'admin' ? 
+                    <div className='slotView'> 
+                        <p>{this.props.time}</p>
+                        {this.state.slotInfo ? 
+                        <p>{`Appointment: ${this.state.slotInfo}`}</p>
+                        : 
+                        <button onClick={this.updateModalToggle}>+</button>
+                        }
+                        {this.state.modalToggle ?
+                        <div className="addApptModalWrapper">
+                            <AddAppt 
+                                updateModalToggle={this.updateModalToggle}
+                                slotId={this.props.slotId}
+                                updateSlotInfo={this.updateSlotInfo}
+                                user={this.props.user}
+                                date={this.props.date} 
+                                time={this.props.time}
+                            />
+                        </div>
+                        :
+                        null
+                        }
+                        <hr/>
+                    </div>
+                    :
+                    this.state.slotInfo ?
+                        <div className='blocked clientSlotView'>
+                            <h4>{this.props.time}</h4>
+                        </div>
+                        :
+                        <div>
+                            <div onClick={this.updateModalToggle} className='open clientSlotView'>
+                                <h4>{this.props.time}</h4>
+                            </div>
+                                {this.state.modalToggle ?
+                                    <div className="addApptModalWrapper">
+                                        <AddAppt 
+                                            updateModalToggle={this.updateModalToggle}
+                                            slotId={this.props.slotId}
+                                            updateSlotInfo={this.updateSlotInfo}
+                                            user={this.props.user}   
+                                            date={this.props.date} 
+                                            time={this.props.time}
+                                        />
+                                    </div>
+                                    :
+                                    null
+                                }
+                        </div>
+                    
                 }
-                {this.state.modalToggle ?
-                <div className="addApptModal">
-                    <AddAppt 
-                        updateModalToggle={this.updateModalToggle}
-                        slotId={this.props.slotId}
-                        updateSlotInfo={this.updateSlotInfo}
-                    />
-                </div>
-                :
-                null
-                }
-                <hr/>
             </div>
         )
     }
