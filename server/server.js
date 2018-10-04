@@ -22,6 +22,8 @@ const {
     ENVIRONMENT
   } = process.env;
 
+  app.use( express.static( `${__dirname}/../build` ) )
+
 app.use(session({
     secret: SESSION_SECRET,
     resave: false,

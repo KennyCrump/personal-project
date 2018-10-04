@@ -87,7 +87,8 @@ class AdminHome extends Component{
         return(
             <div>
                 <div className='homeDateDisplay'>
-                    <button onClick={() => this.changeDate(-1)}><h2>{'<'}</h2></button>
+                <button onClick={() => this.changeDate(-7)}><h2>{'<<'}</h2><p>Week</p></button>
+                    <button onClick={() => this.changeDate(-1)}><h2>{'<'}</h2><p>Day</p></button>
                     <div className='dateDisplayText'>
                         {date === moment().format('MM/DD/YY') ?
                             <h2 className='dateDisplayText'>{` Today's Schedule `}</h2>
@@ -95,7 +96,8 @@ class AdminHome extends Component{
                             <h2 className='dateDisplayText'>{` Schedule for ${date} `}</h2>
                         }
                     </div>
-                    <button onClick={() => this.changeDate(1)}><h2>{'>'}</h2></button>
+                    <button onClick={() => this.changeDate(1)}><h2>{'>'}</h2><p>Day</p></button>
+                    <button onClick={() => this.changeDate(7)}><h2>{'>>'}</h2><p>Week</p></button>
                 </div>
                 <div className='adminHome'>
                     <div>

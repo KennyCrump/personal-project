@@ -1,9 +1,12 @@
 import React, {Component} from 'react'
+import dotenv from 'dotenv'
 import axios from 'axios'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import { getUserData } from '../../ducks/reducer';
 import './Nav.css'
+
+dotenv.config()
 
 class Nav extends Component{
 
@@ -22,7 +25,7 @@ class Nav extends Component{
     logout = () => {
         axios.post('/auth/logout', {}).then(
             console.log('goodbye'),
-            window.location = "http://localhost:3000"
+            window.location = process.env.REACT_APP_HOME
         )
     }
 
