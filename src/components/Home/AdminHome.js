@@ -106,11 +106,11 @@ class AdminHome extends Component{
                             updateHomeToggle={this.updateHomeToggle}/>
                     </div>
                     <div>
-                        <h3>Clients on Schedule</h3>
+                        <h2>Clients on Schedule</h2>
                         {userList}
                     </div>
                     <div>
-                        <h3>Appointments on Schedule</h3>
+                        <h2>Appointments on Schedule</h2>
                         {apptList}
                     </div>
                 </div>

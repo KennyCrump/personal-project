@@ -5,6 +5,7 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import { getUserData } from '../../ducks/reducer';
 import './Nav.css'
+import logo from './calendar.png'
 
 dotenv.config()
 
@@ -32,13 +33,16 @@ class Nav extends Component{
     render(){
         return(
             <div className='navBar'>
-                <h1 className='logo'>TRACK YOUR TIME</h1>
+                <div className='logoDiv'>
+                <img className='logo' src={logo} alt=""/>
+                <h1 className='logoText'>APPOINT HUB</h1>
+                </div>
                 {this.props.user.admin === 'admin' ?
                     <div className='navLinks'>
                         <Link className='navTabs' to='/admin/home'><p className='linkText'>Home</p></Link>
                         <Link className='navTabs' to='/schedule'><p className='linkText'>Schedule</p></Link>
-                        <Link className='navTabs' to='/users'><p className='linkText'>Users</p></Link>
-                        <button onClick={this.logout}>Logout</button> 
+                        <Link className='navTabs' id='users' to='/users'><p className='linkText'>Users</p></Link>
+                        <div className='navTabs' id='logoutDiv'><button onClick={this.logout}>Logout</button></div> 
                     </div>
                 :
                     this.props.user.admin === 'client' ?

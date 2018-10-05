@@ -63,23 +63,10 @@ class Appointment extends Component{
                         <p>Date: {date}</p>
                     }
                     <p>Time: {time}</p>
-                    {editToggle ?
-                        <div>
-                            <p>Summary: </p>
-                            <input type="text" 
-                                value={summary} 
-                                onChange={e => this.setState({summary: e.target.value})}/>
-                            <p>Notes: </p>
-                            <input type="text"
-                                value={notes}
-                                onChange={e => this.setState({notes: e.target.value})}/>
-                        </div>
-                        :
                         <div>
                             <p>Summary: {summary}</p>
-                            <p>Notes: {notes}</p>
+                            {/* <p>Notes: {notes}</p> */}
                         </div>
-                    }
                 </div>
                 {modalToggle ?
                     <div className='appointmentModalWrapper'>

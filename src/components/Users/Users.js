@@ -44,9 +44,11 @@ class Users extends Component{
         })
         return(
             <div>
-                <input type="text" onChange={(e) => this.setState({searchInput: e.target.value})}/>
-                <button onClick={this.searchUsers}>Search Users</button>
                 <div className='userList'>
+                    <div className='userSearch'>
+                        <input type="text" onChange={(e) => this.setState({searchInput: e.target.value})}/>
+                        <button onClick={this.searchUsers}>Search Users</button>
+                    </div>
                     {userList}
                 </div>
             </div>

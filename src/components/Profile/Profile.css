@@ -18,13 +18,15 @@
 
 .appointmentWrapper{
     width: 250px;
-    border: 1px blue solid;
+    background-color: rgb(230, 228, 228);
+    border: 1px cadetblue solid;
     margin: 10px;
+    padding-top: 10px;
+    border-radius: 4px;
 }
 .appointmentWrapper:hover{
-    /* border: 1px solid aqua; */
-    box-shadow: 5px 3px 3px #00000088;
-    background-color: #a1fdf188;
+    box-shadow: 3px 3px 3px #00000088;
+    background-color: rgba(184, 184, 184, 0.562);
     cursor: pointer;
 }
 .appointmentModalWrapper{

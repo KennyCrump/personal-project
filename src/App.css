@@ -1,10 +1,18 @@
 body{
-  background-color: beige;
+  background-color: #F8F9FB;
 }
 .App {
   text-align: center;
-  background-color: beige;
+  background-color: #F8F9FB;
 }
+p, h1, h2, h3, h4{
+  font-family: 'Bai Jamjuree', sans-serif;
+  /* font-weight: 700; */
+}
+h1{
+  font-weight: 700;
+}
+
 Link{
   text-decoration: none;
 }
@@ -13,27 +21,4 @@ Link{
 
 
 }
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
-
-.App-title {
-  font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}

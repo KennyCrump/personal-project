@@ -2,11 +2,17 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    background-color: azure;
+    background-color: rgb(230, 228, 228);
     border: 1px solid cadetblue;
+    border-radius: 4px;
     height: 100px;
     width: 320px;
     margin-bottom: 15px;
+}
+.userMini:hover{
+    box-shadow: 3px 3px 3px #00000088;
+    background-color: rgba(184, 184, 184, 0.562);
+    cursor: pointer;
 }
 .miniProfilePic{
     width: 75px;
@@ -26,4 +32,15 @@
 }
 .userList{
     margin-left: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-content: center;
+    width: 320px;
+    padding-right: 20px;
+    border-right: 1px solid cadetblue;
 }
+.userSearch{
+    margin-bottom: 10px;
+}
+
