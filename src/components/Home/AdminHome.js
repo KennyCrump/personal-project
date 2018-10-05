@@ -76,7 +76,7 @@ class AdminHome extends Component{
                         slotId={appt.slot_id}  
                         summary={appt.summary}
                         date={appt.date}
-                        time={appt.time_formatted}
+                        time={moment(appt.time_formatted, 'hh:mm A').format('h:mm A')}
                         notes={appt.notes}
                         username={appt.user_name}
                         picture={appt.picture}
@@ -100,18 +100,22 @@ class AdminHome extends Component{
                     <button onClick={() => this.changeDate(7)}><h2>{'>>'}</h2><p>Week</p></button>
                 </div>
                 <div className='adminHome'>
+                    <div className='clientListView'>
+                        <h2>Clients on Schedule</h2>
+                        <div className='clientList'>
+                            {userList}
+                        </div>
+                    </div>
                     <div>
                         <DisplayDay 
                             date={this.state.date}
                             updateHomeToggle={this.updateHomeToggle}/>
                     </div>
-                    <div>
-                        <h2>Clients on Schedule</h2>
-                        {userList}
-                    </div>
-                    <div>
+                    <div className='appointmentsView'>
                         <h2>Appointments on Schedule</h2>
-                        {apptList}
+                        <div className='homeApptList'>
+                            {apptList}  
+                        </div>
                     </div>
                 </div>
             </div>

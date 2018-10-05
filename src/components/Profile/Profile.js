@@ -19,8 +19,21 @@ class Profile extends Component{
     }
 
     componentDidMount(){
-        if(this.props.user.admin === 'admin'){
+        if(this.props.user.admin === 'admin' && !this.props.userSearch){
             axios.get(`/api/user/${this.props.match.params.id}`)
+                .then(user => {
+                    console.log(user)
+                    let userInfo = user.data[0]     //single object for pulling user Info
+                    let userAppts = user.data       //Array of all appts
+                    this.setState({
+                        user_name: userInfo.user_name,
+                        picture: userInfo.picture,
+                        email: userInfo.email,
+                        user_id: userInfo.user_id,
+                        userAppts: userAppts})
+                })
+        }else if(this.props.user.admin === 'admin' && this.props.userSearch){
+            axios.get(`/api/user/${this.props.selectedUser.user_id}`)
                 .then(user => {
                     console.log(user)
                     let userInfo = user.data[0]     //single object for pulling user Info
@@ -45,6 +58,24 @@ class Profile extends Component{
                         user_id: userInfo.user_id,
                         userAppts: userAppts})
                 })
+        }
+    }
+    componentDidUpdate(prevProps){
+        if(prevProps.selectedUser !== this.props.selectedUser){
+            if(this.props.user.admin === 'admin' && this.props.userSearch){
+                axios.get(`/api/user/${this.props.selectedUser.user_id}`)
+                    .then(user => {
+                        console.log(user)
+                        let userInfo = user.data[0]     //single object for pulling user Info
+                        let userAppts = user.data       //Array of all appts
+                        this.setState({
+                            user_name: userInfo.user_name,
+                            picture: userInfo.picture,
+                            email: userInfo.email,
+                            user_id: userInfo.user_id,
+                            userAppts: userAppts})
+                    })
+            }
         }
     }
     deleteAppt = (appt_id) =>{
@@ -92,7 +123,7 @@ class Profile extends Component{
                         />
         })
         return(
-            <div>
+            <div className='profilePage'>
                 <div>
                     <img className='profilePagePicture' src={picture} alt="profile_picture"/>
                     <p>{user_name}</p>  

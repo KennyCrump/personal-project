@@ -1,6 +1,9 @@
 .adminHome{
+    height: 750px;
     display: flex;
     justify-content: space-around;
+    padding-left: 70px;
+    padding-right: 70px;
 }
 .homeDateDisplay{
     display: flex;
@@ -8,7 +11,7 @@
     align-items: center;
 }
 .dateDisplayText{
-    width: 270px;
+    width: 280px;
 }
 .linkToUser{
     text-decoration: none;
@@ -16,4 +19,24 @@
 }
 .selectedUser{
     margin-top: 30px;
+}
+.appointmentsView{
+    width: 330px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.clientListView{
+    width: 330px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.homeApptList{
+    height: 720px;
+    overflow-y: auto;
+}
+.clientList{
+    height: 720px;
+    overflow-y: auto;
 }

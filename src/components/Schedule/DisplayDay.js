@@ -54,6 +54,7 @@ class DisplayDay extends Component {
           userId={slot.user_id}
           apptId={slot.appt_id}
           taskId={slot.task_id}
+          username={slot.user_name}
           apptAddedToggle={this.state.apptAddedToggle}
           updateApptAddedToggle={this.updateApptAddedToggle}
           updateHomeToggle={this.props.updateHomeToggle}

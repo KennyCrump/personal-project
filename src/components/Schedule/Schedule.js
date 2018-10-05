@@ -73,15 +73,16 @@ class Schedule extends Component{
         })
         return(
             <div>
-                <button onClick={() => this.moveWeek(-7)}>Last Week</button>
-                {this.state.startOfWeek} - {this.state.endOfWeek}
-                <button onClick={() => this.moveWeek(7)}>Next Week</button>
-                <br/>
-                {this.props.user.admin === 'admin' ?
-                    <button onClick={this.modalToggle}>Add Time Slots</button>
-                :
-                    null
-                }
+                <div className='weekViewPicker'>
+                    <button className='arrowButtons' onClick={() => this.moveWeek(-7)}><h2>{'<<'}</h2></button>
+                    <h2>{` ${this.state.startOfWeek} - ${this.state.endOfWeek} `}</h2>
+                    <button className='arrowButtons' onClick={() => this.moveWeek(7)}><h2>{'>>'}</h2></button>
+                </div>
+                    {this.props.user.admin === 'admin' ?
+                        <button className='addSlotsButton' onClick={this.modalToggle}>Add Time Slots</button>
+                    :
+                        null
+                    }
                 <div className='weekView'>
                     {weekView}
                 </div>

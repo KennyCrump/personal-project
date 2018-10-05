@@ -13,14 +13,18 @@ class TimeSlot extends Component{
     }
 
     componentDidMount(){
-        let {time, date, apptId, user} = this.props
+        let {time, date, apptId, user, username} = this.props
         let timeSlot = `${date} ${time}`
         console.log('time format', timeSlot)
-        this.setState({slotInfo: apptId})
+        
         if(user.admin !== 'admin'){
             if(moment().isAfter(moment(timeSlot, 'MM/DD/YY h:mm A'))){
                 this.setState({slotInfo: 'Past'})
+            }else{
+                this.setState({slotInfo: apptId})
             }
+        }else{
+            this.setState({slotInfo: username})
         }
     }
 
@@ -45,12 +49,17 @@ class TimeSlot extends Component{
         return(
             <div>
                 {this.props.user.admin === 'admin' ? 
-                    <div className='slotView'> 
-                        <p>{this.props.time}</p>
+                    <div> 
                         {this.state.slotInfo ? 
-                        <p>{`Appointment: ${this.state.slotInfo}`}</p>
+                            <div className='blocked adminSlotView'>
+                                <p className='slotTimeText'>{this.props.time}</p>
+                                <p className='apptInfoText'>{`${this.state.slotInfo}`}</p>
+                            </div>
                         : 
-                        <button onClick={this.updateModalToggle}>+</button>
+                        <div onClick={this.updateModalToggle} className='open adminSlotView'>
+                            <p className='slotTimeText'>{this.props.time}</p>
+                            <button onClick={this.updateModalToggle}>+</button>
+                        </div>
                         }
                         {this.state.modalToggle ?
                         <div className="addApptModalWrapper">
@@ -66,7 +75,6 @@ class TimeSlot extends Component{
                         :
                         null
                         }
-                        <hr/>
                     </div>
                     :
                     this.state.slotInfo ?

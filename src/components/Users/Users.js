@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom'
 import './Users.css'
 
 import DisplayUser from './DisplayUser'
+import Profile from '../Profile/Profile'
 
 
 class Users extends Component{
@@ -12,7 +13,8 @@ class Users extends Component{
         this.state = {
             users: [],
             usersDisplayed:[],
-            searchInput: ''
+            searchInput: '',
+            selectedUser: {}
         }
     }
 
@@ -34,22 +36,33 @@ class Users extends Component{
 
     render(){
         let userList = this.state.usersDisplayed.map(user => {
-            return  <Link className='linkToUser' key={user.user_id} to={`/user/${user.user_id}`}>
+            return  <div className='linkToUser' key={user.user_id} onClick={e => this.setState({selectedUser: user})}>
                         <DisplayUser  
                             userId={user.user_id} 
                             picture={user.picture}
                             username={user.user_name}
                         />
-                    </Link>
+                    </div>
         })
+        console.log('selected user: ', this.state.selectedUser)
         return(
-            <div>
+            <div className='entireUsersListPage'>
                 <div className='userList'>
                     <div className='userSearch'>
                         <input type="text" onChange={(e) => this.setState({searchInput: e.target.value})}/>
                         <button onClick={this.searchUsers}>Search Users</button>
                     </div>
                     {userList}
+                </div>
+                <div className='selectedUserProfile'>
+                    {this.state.selectedUser.user_id ?
+                        <Profile  
+                                selectedUser={this.state.selectedUser} 
+                                userSearch={true}
+                            />
+                    :
+                        null
+                    }
                 </div>
             </div>
         )

@@ -75,56 +75,66 @@ class AddAppt extends Component{
             <div className='addApptModal'>
             {this.props.user.admin === 'admin' ?
             <div className='apptModalContent'>
-                <h2>Book an Appointment</h2>
-                <h3>{`on ${this.props.date} at ${this.props.time}`}</h3>
+                <h2 id='addApptTitle'>Book an Appointment</h2>
+                <h3 id='addApptDate'>{`on ${this.props.date} at ${this.props.time}`}</h3>
                 <div className='changeApptInfo'>
                     <div className='userSelector'>
-                        <h4>Find User: </h4>
+                        <h4 className='findUserText'>Find User: </h4>
                         <input onChange={e => this.setState({searchInput: e.target.value})} placeholder='Filter Results Here' type="text"/>
                         <div id='userListSearch'>
                             {displayedUsers}
                         </div>
                     </div>
                     <div className='appointmentSummary'>
-                        <h4>Selected User:</h4>
-                        <div className='selectedUser'>
-                            {this.state.selectedUser.user_id ?
-                                <DisplayUser 
-                                    key='selectedUser'
-                                    userId={this.state.selectedUser.user_id} 
-                                    picture={this.state.selectedUser.picture}
-                                    username={this.state.selectedUser.user_name}
-                                />
-                            :
-                                <p>Please Select A User</p>
-                            }
-                        </div>
-                        <h4>Appointment Summary:</h4>
+                        <h4 className='selectedUserTitle'>Selected User:</h4>
+                            <div className='selectedUser'>
+                                {this.state.selectedUser.user_id ?
+                                    <DisplayUser 
+                                        key='selectedUser'
+                                        userId={this.state.selectedUser.user_id} 
+                                        picture={this.state.selectedUser.picture}
+                                        username={this.state.selectedUser.user_name}
+                                    />
+                                :
+                                    <p className='selectUserText'>Please Select A User</p>
+                                }
+                            </div>
+                        <h4 className='apptSummaryTitle'>Appointment Summary:</h4>
                         <textarea placeholder='Please include a brief description of the reason for this appointment'
                             onChange={e => this.setState({summary: e.target.value})} 
                             rows="4" cols="50" /><br/>
-                        <h4>Additional Notes:</h4>
+                        <h4 className='apptSummaryTitle'>Additional Notes:</h4>
                         <textarea placeholder='Any additional notes about the appointment'
                             onChange={e => this.setState({notes: e.target.value})} 
                             rows="8" cols="50" />
                     </div>
                 </div>
-                <div>
-                    <button onClick={() => this.props.updateModalToggle()}>Cancel</button>
-                    <button onClick={this.addAppt}>Confirm Booking</button>
+                <div className='addApptButtons'>
+                    <div className='eachButtonDiv'>
+                        <button id='cancelAddApptButton' onClick={() => this.props.updateModalToggle()}>Cancel</button>
+
+                    </div>
+                    <div className='eachButtonDiv'>
+                        <button id='confirmAddApptButton' onClick={this.addAppt}>Confirm</button>
+                    </div>
                 </div>
             </div>
             :
             <div className='apptModalContent'>
-                <h2>Book an Appointment</h2>
-                <h3>{`on ${this.props.date} at ${this.props.time}`}</h3>
+                <div id='addApptTitle'><h2>Book an Appointment</h2></div>
+                
+                <h3 className='addApptDate'>{`on ${this.props.date} at ${this.props.time}`}</h3>
                 <h4>Appointment Summary:</h4>
                 <textarea placeholder='Please include a brief description of the reason for this appointment'
                     onChange={e => this.setState({summary: e.target.value})} 
                     rows="4" cols="50" /><br/>
-                <div>
-                    <button onClick={() => this.props.updateModalToggle()}>Cancel</button>
-                    <button onClick={this.addAppt}>Confirm Your Booking</button>
+                <div className='addApptButtons'>
+                    <div className='eachButtonDiv'>
+                        <button id='cancelAddApptButton' onClick={() => this.props.updateModalToggle()}>Cancel</button>
+                    </div>
+                    <div className='eachButtonDiv'>
+                        <button id='confirmAddApptButton' onClick={this.addAppt}>Confirm Your Booking</button>
+                    </div>
                 </div>
             </div>
             }

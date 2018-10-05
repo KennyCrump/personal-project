@@ -8,6 +8,7 @@
     height: 100px;
     width: 320px;
     margin-bottom: 15px;
+    /* margin-top: 7.5px; */
 }
 .userMini:hover{
     box-shadow: 3px 3px 3px #00000088;
@@ -26,6 +27,11 @@
     text-decoration: none;
     font-size: 18px;
 }
+
+.entireUsersListPage{
+    display: inline-flex;
+    width: 100vw;
+}
 .linkToUser{
     text-decoration: none;
     color: rgb(0, 0, 92);
@@ -42,5 +48,8 @@
 }
 .userSearch{
     margin-bottom: 10px;
+}
+.selectedUserProfile{
+    width: 100%;
 }
 
