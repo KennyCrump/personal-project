@@ -5,8 +5,8 @@
     align-items: center;
 }
 .profilePagePicture{
-    height: 200px;
-    width: 200px;
+    height: 150px;
+    width: 150px;
     object-fit: cover;
     border-radius: 50%;
 }
@@ -22,10 +22,9 @@
     padding-left: 60px;
     width: 1200px;
 }
-
 .appointmentWrapper{
     width: 250px;
-    background-color: rgb(230, 228, 228);
+    background-color: #aeddfa;
     border: 1px cadetblue solid;
     margin: 10px;
     padding-top: 10px;
@@ -33,7 +32,7 @@
 }
 .appointmentWrapper:hover{
     box-shadow: 3px 3px 3px #00000088;
-    background-color: rgba(184, 184, 184, 0.562);
+    background-color: #6ac3fa;
     cursor: pointer;
 }
 .appointmentModalWrapper{
@@ -48,9 +47,53 @@
     background-color: #f0f8ff98;
 }
 .appointmentModal{
-    background-color: #6CB6E6;
+    background-color: #F2F0F2;
+    border: #73afc7 1px solid;
+    border-radius: 15px;
     height: 610px;
     width: 60vw;
+}
+.apptModalContent{
+    display: flex;
+    flex-direction: column;
+}
+.apptDateText{
+    font-size: 18px;
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+.summaryBox{
+    width: 622px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.summaryDiv{
+    height: 84px;
+    width: 622px;
+    padding: 10px;
+    text-align: start;
+    background-color: rgb(241, 241, 241);
+    border: rgb(190, 190, 190) 1px solid;
+}
+.notesBox{
+    width: 622px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.notesDiv{
+    width: 622px;
+    height: 136px;
+    text-align: start;
+    background-color: rgb(241, 241, 241);
+    border: rgb(190, 190, 190) 1px solid;
+    padding: 10px;
+}
+.detailsText{
+    margin: 0;
 }
 .deleteModalWrapper{
     height: 100vh;

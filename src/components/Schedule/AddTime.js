@@ -15,8 +15,7 @@ class AddTime extends Component{
             includeWeekends: false,
             startTime: '9:00',
             endTime: '17:00',
-            timeInterval: 15
-
+            timeInterval: 60
         }
     }
     
@@ -102,34 +101,45 @@ class AddTime extends Component{
         console.log(this.state)
         return(
             <div className='datePicker'>
-                Add New Day To Schedule
-                <DateRange
-                    format="MM/DD/YY"
-                    onInit={this.handleSelect}
-                    onChange={this.handleSelect}
-                    calendars={1}
-                />
-                <input type="checkbox" 
-                onChange={() => this.setState({includeWeekends: !this.state.includeWeekends})}
-                /> Include Weekends <br />
-
-                <br />
+                <h1 className='addDayTitle'>
+                    Add New Day To Schedule
+                </h1>
+                <div className='dateCalendarWrapper'>
+                    <div className='dateCalendar'>
+                        <DateRange
+                            format="MM/DD/YY"
+                            onInit={this.handleSelect}
+                            onChange={this.handleSelect}
+                            calendars={1}
+                        />
+                    </div>
+                </div>
                 <TimePicker
+                    className='timePicker'
                     onChange={this.setStartTime}
                     value={this.state.startTime}
-                    /> - 
+                    />{` - `} 
                 <TimePicker
+                className='timePicker'
                     onChange={this.setEndTime}
                     value={this.state.endTime}
                     />
-                    <select onChange={(e) => this.setState({timeInterval: e.target.value})} name="" id="">
-                        <option value={15}>15 minute intervals</option>
-                        <option value={30}>30 intervals</option>
+                    <select className='intervalSelect' onChange={(e) => this.setState({timeInterval: e.target.value})} name="" id="">
                         <option value={60}>1 hour intervals</option>
+                        <option value={30}>30 minute intervals</option>
+                        <option value={20}>20 minute intervals</option>
+                        <option value={15}>15 minute intervals</option>
+                        <option value={10}>10 minute intervals</option>
+                        
                     </select>
                     <br/>
-                    <button onClick={this.createTimeSlots}>Create Time Slots</button>
-                    <button onClick={this.props.modalToggle}>Cancel</button>
+                    <input className='weekendsCheckbox' type="checkbox" 
+                onChange={() => this.setState({includeWeekends: !this.state.includeWeekends})}
+                /> Include Weekends <br />
+                    <div className='timeSlotButtonsWrapper'>
+                        <button className='timeSlotButton' onClick={this.props.modalToggle}>Cancel</button>
+                        <button className='timeSlotButton' onClick={this.createTimeSlots}>Create Time Slots</button>
+                    </div>
             </div>
         )
     }

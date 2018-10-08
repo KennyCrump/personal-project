@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import dotenv from 'dotenv'
 import axios from 'axios'
 import {connect} from 'react-redux'
 
@@ -48,9 +49,16 @@ class Appointment extends Component{
         }
     }
 
+    rescheduleAppt = () => {
+        const {REACT_APP_HOME} = process.env
+        this.cancelAppt()
+        window.location = (`${REACT_APP_HOME}/#/schedule`)
+    }
+
     render(){
         let {date, time, username, picture} = this.props //also on props: apptId, slotId, userId
         let {summary, notes, total, editToggle, modalToggle, deleteToggle} = this.state
+        console.log('appt total: ', this.state.total)
         return(
             <div>  
                 <div className='appointmentWrapper' onClick={this.handleModalToggle}>   
@@ -72,18 +80,25 @@ class Appointment extends Component{
                     <div className='appointmentModalWrapper'>
                         <div className='appointmentModal'>
                             <h2>Appointment For {username}</h2>
-                            <h3>{date} at {time}</h3>
+                            <p className='apptDateText'>Date: {date}</p>
+                            <p className='apptDateText'>Time: {time}</p>
                             {editToggle ?
-                            <div>
-                                <h4>Appointment Summary</h4>
-                                <input value={summary} 
-                                    onChange={e => this.setState({summary: e.target.value})}
-                                    type='text'/>
-                                <h4>Additional Notes</h4>
-                                <input value={notes} 
-                                    onChange={e => this.setState({notes: e.target.value})}
-                                    type='text'/>
-                                <h4>Total Cost: $</h4>
+                            <div className='apptModalContent'>
+                                <div className='summaryBox'>
+                                    <h4>Appointment Summary:</h4>
+                                    <textarea placeholder='Please include a brief description of the reason for this appointment'
+                                        onChange={e => this.setState({summary: e.target.value})} 
+                                        rows="6" cols="89" 
+                                    />
+                                </div>
+                                <div className='notesBox'>
+                                    <h4>Additional Notes:</h4>
+                                    <textarea placeholder='Any additional notes about the appointment'
+                                        onChange={e => this.setState({notes: e.target.value})} 
+                                        rows="10" cols="89" />
+
+                                </div>
+                                    <h4>Total Cost: $</h4>
                                 <input value={total} 
                                     onChange={e => this.setState({total: e.target.value})}
                                     type='text'/>
@@ -91,17 +106,33 @@ class Appointment extends Component{
                                 <button onClick={this.saveUpdatedAppt}>Save Changes</button>
                             </div>  
                             :
-                            <div>
-                                <h4>Appointment Summary</h4>
-                                <p>{summary}</p>
-                                <h4>Additional Notes</h4>
-                                <p>{notes}</p>
+                            <div className='apptModalContent'>
+                                <div className='summaryBox'>
+                                    <h4>Appointment Summary</h4>
+                                    <div className='summaryDiv'>
+                                        <p className='detailsText'>{summary}</p>
+                                    </div>
+                                </div>
+                                <div className='notesBox'>
+                                    <h4>Additional Notes</h4>
+                                    <div className='notesDiv'>
+
+                                    </div>
+                                    <p className='detailsText'>{notes}</p>
+                                </div>
                                 <h4>Total Cost: ${total}</h4>
                                 <button onClick={this.handleModalToggle}>Back</button>
-                                <button onClick={this.handleEditToggle}>Edit</button>
+                                {this.props.admin === 'admin' ? 
+                                    <button onClick={this.handleEditToggle}>Edit</button>
+                                :
+                                    null
+                                }
                                 {this.props.upcoming ? 
                                     <button onClick={this.handleDeleteToggle}>Cancel or Reschedule Appointment</button>
                                 :
+                                    this.state.total !== 0 ?
+                                        <button>Make a Payment</button>
+                                    :
                                     null
                                 }
                             </div>

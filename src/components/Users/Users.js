@@ -47,13 +47,16 @@ class Users extends Component{
         console.log('selected user: ', this.state.selectedUser)
         return(
             <div className='entireUsersListPage'>
-                <div className='userList'>
-                    <div className='userSearch'>
-                        <input type="text" onChange={(e) => this.setState({searchInput: e.target.value})}/>
-                        <button onClick={this.searchUsers}>Search Users</button>
-                    </div>
+            <div className='userList'>
+                <div className='userSearch'>
+                    <input type="text" onChange={(e) => this.setState({searchInput: e.target.value})}/>
+                    <button onClick={this.searchUsers}>Search Users</button>
+                </div>
+                <div className='users'>
                     {userList}
                 </div>
+
+            </div>
                 <div className='selectedUserProfile'>
                     {this.state.selectedUser.user_id ?
                         <Profile  

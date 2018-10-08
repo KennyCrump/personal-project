@@ -71,6 +71,7 @@ class AdminHome extends Component{
         let apptList = apptsByDate.map(appt => {
             return <Appointment 
                         key={appt.appt_id}
+                        admin='admin'
                         upcoming={false}
                         apptId={appt.appt_id}
                         slotId={appt.slot_id}  

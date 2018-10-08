@@ -1,6 +1,9 @@
 body{
   background-color: #F8F9FB;
 }
+textarea{
+  font-size: 14px;
+}
 .App {
   text-align: center;
   background-color: #F8F9FB;

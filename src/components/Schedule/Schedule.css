@@ -6,8 +6,6 @@
     justify-content: center;
     align-items: center;
     margin-top: 10px;
-    /* border-top: #b3b3b3 1px solid;
-    border-bottom: #b3b3b3 1px solid; */
     background-color: rgb(245, 247, 252)
 }
 .arrowButtons{
@@ -22,6 +20,9 @@
 .addSlotsButton{
     width: 100px;
     height: 30px;
+}
+.addSlotsButton:hover{
+    background-color: #e4e4e4;
 }
 .dayView{
     width: 15vw;
@@ -42,12 +43,60 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgba(127, 255, 212, 0.37)
+    background-color: #f0f8ff98;
 }
-
+.dateCalendarWrapper{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.dateCalendar{
+    width: 360px;
+    border-radius: 6px;
+    margin-bottom: 30px;
+    margin-top: 20px;
+}
 .datePicker{
-    background-color: blanchedalmond;
-    padding: 50px;
+    height: 560px;
+    width: 50vw;
+    border-radius: 4px;
+    background-color: #F2F0F2;
+    border: #6CB6E6 1px solid;
+    padding: 25px;
+    margin-bottom: 50px;
+}
+.Calendar{
+    background-color: #cdf1ff;
+}
+.addDayTitle{
+    margin-bottom: 0;
+}
+.timePicker{
+    background-color: #cdf1ff;
+}
+.intervalSelect{
+    height: 30px;
+    margin-left: 15px;
+}
+.weekendsCheckbox{
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+.timeSlotButtonsWrapper{
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.timeSlotButton{
+    height: 35px;
+    width: 120px;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+.timeSlotButton:hover{
+    background-color: #e4e4e4;
 }
 .dayView{
     display: flex;
@@ -64,14 +113,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgba(240, 248, 255, 0.596);
+    background-color: #f0f8ff98;
 }
 .addApptModal{
-    position: relative;
     justify-content: space-between;
     height: 610px;
     width: 60vw;
-    background-color: #6CB6E6;
+    background-color: #F2F0F2;
     border: #73afc7 1px solid;
     border-radius: 15px;
 }
@@ -79,6 +127,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+.clientApptModal{
+    margin-top: 50px;
 }
 
 #xButton{
@@ -128,12 +179,17 @@
     background-color: lightgrey;
     border: 1px solid #b3b3b3;
 }
+.blockedText{
+    font-size: 18px;
+    color: gray;
+}
 .open{
-    background-color: aquamarine;
-    border: #00e96d 1px solid
+    background-color: whitesmoke;
+    border: forestgreen 1px solid;
+    font-size: 20px;
 }
 .open:hover{
-    background-color: #00e96d;
+    background-color: rgb(100, 231, 100);
     border: aquamarine 1px solid;
     cursor: pointer;
     box-shadow: #b3b3b3 2px 2px 2px;
@@ -155,7 +211,7 @@
 }
 .selectedUser{
     height: 102px;
-    background-color: #cdf1ff;
+    background-color: rgba(231, 229, 229, 0.924);
     border: 1px solid rgba(23, 92, 221, 0.322);
     border-radius: 4px;
     /* display: flex;
@@ -176,6 +232,11 @@
 #addApptTitle{
     height: 20px;
     font-size: 25px;
+    margin-bottom: 5px;
+}
+addApptTitleClient{
+    height: 20px;
+    font-size: 30px;
     margin-bottom: 5px;
 }
 h3#addApptDate{
@@ -209,5 +270,5 @@ h3#addApptDate{
 #confirmAddApptButton{
     height: 30px;
     width: 80px;
-    border-radius: 3px;
+    border-radius: 4px;
 }

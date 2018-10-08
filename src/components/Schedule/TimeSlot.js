@@ -58,7 +58,7 @@ class TimeSlot extends Component{
                         : 
                         <div onClick={this.updateModalToggle} className='open adminSlotView'>
                             <p className='slotTimeText'>{this.props.time}</p>
-                            <button onClick={this.updateModalToggle}>+</button>
+                            {/* <button onClick={this.updateModalToggle}>+</button> */}
                         </div>
                         }
                         {this.state.modalToggle ?
@@ -79,12 +79,12 @@ class TimeSlot extends Component{
                     :
                     this.state.slotInfo ?
                         <div className='blocked clientSlotView'>
-                            <h4>{this.props.time}</h4>
+                            <p className='blockedText'>{this.props.time}</p>
                         </div>
                         :
                         <div>
                             <div onClick={this.updateModalToggle} className='open clientSlotView'>
-                                <h4>{this.props.time}</h4>
+                                <p>{this.props.time}</p>
                             </div>
                                 {this.state.modalToggle ?
                                     <div className="addApptModalWrapper">

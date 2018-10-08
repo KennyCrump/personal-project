@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import axios from 'axios'
+import dotenv from 'dotenv'
 
 import DisplayUser from '../Users/DisplayUser'
 
@@ -20,11 +21,16 @@ class AddAppt extends Component{
     addAppt = () => {
         let {user_id, summary, notes} = this.state;
         let {slotId: slot_id} = this.props;
+        const {REACT_APP_HOME} = process.env
         axios.post('/api/appt/add', {user_id, summary, slot_id, notes})
             .then(res => {
                 this.props.updateSlotInfo(res.data[0])
                 this.props.updateModalToggle()
+                if(this.props.user.admin !== 'admin'){
+                    window.location = `${REACT_APP_HOME}/#/profile`
+                }
             })
+        
     }
 
     componentDidMount(){
@@ -102,11 +108,11 @@ class AddAppt extends Component{
                         <h4 className='apptSummaryTitle'>Appointment Summary:</h4>
                         <textarea placeholder='Please include a brief description of the reason for this appointment'
                             onChange={e => this.setState({summary: e.target.value})} 
-                            rows="4" cols="50" /><br/>
+                            rows="3" cols="43" /><br/>
                         <h4 className='apptSummaryTitle'>Additional Notes:</h4>
                         <textarea placeholder='Any additional notes about the appointment'
                             onChange={e => this.setState({notes: e.target.value})} 
-                            rows="8" cols="50" />
+                            rows="6" cols="43" />
                     </div>
                 </div>
                 <div className='addApptButtons'>
@@ -120,8 +126,8 @@ class AddAppt extends Component{
                 </div>
             </div>
             :
-            <div className='apptModalContent'>
-                <div id='addApptTitle'><h2>Book an Appointment</h2></div>
+            <div className='apptModalContent clientApptModal'>
+                <h2 id='addApptTitleClient'>Book an Appointment</h2>
                 
                 <h3 className='addApptDate'>{`on ${this.props.date} at ${this.props.time}`}</h3>
                 <h4>Appointment Summary:</h4>
@@ -133,7 +139,7 @@ class AddAppt extends Component{
                         <button id='cancelAddApptButton' onClick={() => this.props.updateModalToggle()}>Cancel</button>
                     </div>
                     <div className='eachButtonDiv'>
-                        <button id='confirmAddApptButton' onClick={this.addAppt}>Confirm Your Booking</button>
+                        <button id='confirmAddApptButton' onClick={this.addAppt}>Confirm Booking</button>
                     </div>
                 </div>
             </div>

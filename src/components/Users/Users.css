@@ -2,7 +2,7 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    background-color: rgb(230, 228, 228);
+    background-color: rgb(202, 202, 202);
     border: 1px solid cadetblue;
     border-radius: 4px;
     height: 100px;
@@ -42,14 +42,19 @@
     flex-direction: column;
     justify-content: flex-start;
     align-content: center;
-    width: 320px;
+    width: 330px;
     padding-right: 20px;
     border-right: 1px solid cadetblue;
 }
+.users{
+    height: 800px;
+    overflow-y: auto;
+}
 .userSearch{
     margin-bottom: 10px;
+    
 }
 .selectedUserProfile{
-    width: 100%;
+    width: 80%;
 }
 

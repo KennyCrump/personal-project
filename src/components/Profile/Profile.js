@@ -93,6 +93,7 @@ class Profile extends Component{
         let upcomingApptsList = upcomingAppts.reverse().map(appt => {
             return <Appointment 
                         key={appt.appt_id}
+                        admin={this.props.user.admin}
                         upcoming={true}
                         apptId={appt.appt_id}
                         slotId={appt.slot_id}  
