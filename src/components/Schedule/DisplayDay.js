@@ -47,6 +47,7 @@ class DisplayDay extends Component {
         <TimeSlot
           key={slot.slot_id}
           user={this.props.user}
+          admin={this.props.user.admin}
           slotId={slot.slot_id}
           date={slot.date}
           time={moment(slot.time_formatted, 'hh:mm A').format('h:mm A')}

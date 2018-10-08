@@ -87,6 +87,7 @@ class Appointment extends Component{
                                 <div className='summaryBox'>
                                     <h4>Appointment Summary:</h4>
                                     <textarea placeholder='Please include a brief description of the reason for this appointment'
+                                        value={this.state.summary}
                                         onChange={e => this.setState({summary: e.target.value})} 
                                         rows="6" cols="89" 
                                     />
@@ -94,16 +95,23 @@ class Appointment extends Component{
                                 <div className='notesBox'>
                                     <h4>Additional Notes:</h4>
                                     <textarea placeholder='Any additional notes about the appointment'
+                                        value={this.state.notes}
                                         onChange={e => this.setState({notes: e.target.value})} 
                                         rows="10" cols="89" />
 
                                 </div>
+                                <div className='apptTotalEdit'>
                                     <h4>Total Cost: $</h4>
-                                <input value={total} 
+                                <input className='apptTotalInput' value={total} 
                                     onChange={e => this.setState({total: e.target.value})}
                                     type='text'/>
-                                <button onClick={this.handleEditToggle}>Cancel</button>
-                                <button onClick={this.saveUpdatedAppt}>Save Changes</button>
+
+                                </div>
+                                <div>
+                                <button className='apptButtons' onClick={this.handleEditToggle}>Cancel</button>
+                                <button className='apptButtons'onClick={this.saveUpdatedAppt}>Save Changes</button>
+
+                                </div>
                             </div>  
                             :
                             <div className='apptModalContent'>
@@ -116,25 +124,26 @@ class Appointment extends Component{
                                 <div className='notesBox'>
                                     <h4>Additional Notes</h4>
                                     <div className='notesDiv'>
-
-                                    </div>
                                     <p className='detailsText'>{notes}</p>
+                                    </div>
                                 </div>
                                 <h4>Total Cost: ${total}</h4>
-                                <button onClick={this.handleModalToggle}>Back</button>
-                                {this.props.admin === 'admin' ? 
-                                    <button onClick={this.handleEditToggle}>Edit</button>
-                                :
-                                    null
-                                }
-                                {this.props.upcoming ? 
-                                    <button onClick={this.handleDeleteToggle}>Cancel or Reschedule Appointment</button>
-                                :
-                                    this.state.total !== 0 ?
-                                        <button>Make a Payment</button>
+                                <div>
+                                    <button className='apptButtons' onClick={this.handleModalToggle}>Back</button>
+                                    {this.props.admin === 'admin' ? 
+                                        <button className='apptButtons' onClick={this.handleEditToggle}>Edit</button>
                                     :
-                                    null
-                                }
+                                        null
+                                    }
+                                    {this.props.upcoming ? 
+                                        <button className='apptButtons' onClick={this.handleDeleteToggle}>Cancel or Reschedule Appointment</button>
+                                    :
+                                        this.state.total !== 0 ?
+                                            <button className='apptButtons'>Make a Payment</button>
+                                        :
+                                        null
+                                    }
+                                </div>
                             </div>
                             }
                         </div>
@@ -145,12 +154,16 @@ class Appointment extends Component{
                 {deleteToggle ? 
                 <div className='deleteModalWrapper'>
                     <div className='deleteModal'>
-                        <h4>{`You are about to cancel your appointment for`}</h4>
-                        <h4>{`${time} on ${date}`}</h4>
-                        <h4>Are you sure?</h4>
-                        <button onClick={this.handleDeleteToggle}>No</button>
-                        <button onClick={this.cancelAppt}>Yes</button>
-                        <button onClick={this.rescheduleAppt}>Yes, and Reschedule</button>
+                        <div className='deleteModalContent'>
+                            <h3>{`You are about to cancel your appointment for`}</h3>
+                            <h4>{`Date: ${date}`}</h4>
+                            <h4>{`Time: ${time}`}</h4>
+                            <h3>Are you sure?</h3>
+                            <button onClick={this.handleDeleteToggle}>No</button>
+                            <button onClick={this.cancelAppt}>Yes</button>
+                            <button onClick={this.rescheduleAppt}>Yes, and Reschedule</button>
+
+                        </div>
                     </div>
                 </div>
                 :

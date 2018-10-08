@@ -19,12 +19,14 @@ class AddAppt extends Component{
     }
 
     addAppt = () => {
-        let {user_id, summary, notes} = this.state;
+        let {user_id, summary, notes, selectedUser} = this.state;
         let {slotId: slot_id} = this.props;
         const {REACT_APP_HOME} = process.env
         axios.post('/api/appt/add', {user_id, summary, slot_id, notes})
             .then(res => {
-                this.props.updateSlotInfo(res.data[0])
+                let apptInfo=res.data[0]
+                apptInfo.user_name = selectedUser.user_name
+                this.props.updateSlotInfo(apptInfo)
                 this.props.updateModalToggle()
                 if(this.props.user.admin !== 'admin'){
                     window.location = `${REACT_APP_HOME}/#/profile`

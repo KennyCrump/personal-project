@@ -16,11 +16,22 @@
     border-radius: 50%;
     object-fit: cover;
 }
+.profileApptsList{
+    height: 600px;
+    overflow-y: auto; 
+}
 .appointmentsList{
     display: flex;
     flex-wrap: wrap;
     padding-left: 60px;
     width: 1200px;
+}
+.pastAppointmentsList{
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 60px;
+    width: 1200px;
+    margin-bottom: 40px;
 }
 .appointmentWrapper{
     width: 250px;
@@ -95,6 +106,21 @@
 .detailsText{
     margin: 0;
 }
+.apptButtons{
+    margin-left: 5px;
+    height: 30px; 
+}
+.apptButtons:hover{
+    background-color: #e4e4e4;
+    cursor: pointer;
+}
+.apptTotalEdit{
+    display: flex;
+    align-items: center;
+}
+.apptTotalInput{
+    width: 20px;
+}
 .deleteModalWrapper{
     height: 100vh;
     width: 100vw;
@@ -104,9 +130,14 @@
     position: fixed;
     top: 0;
     left: 0;
+    background-color: #00000088;
 }
 .deleteModal{
     height: 40vh;
     width: 40vw;
-    background-color: bisque;
+    background-color: rgb(241, 241, 241);
+    border: 1px cadetblue solid;
+}
+.deleteModalContent{
+    margin-top: 30px;
 }

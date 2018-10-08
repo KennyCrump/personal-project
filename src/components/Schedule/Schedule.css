@@ -23,6 +23,7 @@
 }
 .addSlotsButton:hover{
     background-color: #e4e4e4;
+    cursor: pointer;
 }
 .dayView{
     width: 15vw;
@@ -97,6 +98,7 @@
 }
 .timeSlotButton:hover{
     background-color: #e4e4e4;
+    cursor: pointer;
 }
 .dayView{
     display: flex;
@@ -266,9 +268,10 @@ h3#addApptDate{
 }
 #cancelAddApptButton:hover, #confirmAddApptButton:hover{
     background-color: #e4e4e4;
+    cursor: pointer;
 }
 #confirmAddApptButton{
     height: 30px;
-    width: 80px;
+    width: 90px;
     border-radius: 4px;
 }

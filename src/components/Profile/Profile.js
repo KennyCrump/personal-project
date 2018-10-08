@@ -111,6 +111,7 @@ class Profile extends Component{
         let pastApptsList = pastAppts.map(appt => {
             return <Appointment 
                         key={appt.appt_id}
+                        admin={this.props.user.admin}
                         upcoming={false}
                         apptId={appt.appt_id}
                         slotId={appt.slot_id}  
@@ -130,13 +131,13 @@ class Profile extends Component{
                     <p>{user_name}</p>  
                     <p>{email}</p>
                 </div>
-                <div>
+                <div className='profileApptsList'>
                     <h4>Upcoming Appointments</h4>
                     <div className='appointmentsList'>
                         {upcomingApptsList}
                     </div>
                     <h4>Past Appointments</h4>
-                    <div className='appointmentsList'>
+                    <div className='pastAppointmentsList'>
                         {pastApptsList}
                     </div>
                 </div>

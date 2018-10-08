@@ -40,7 +40,7 @@ module.exports = {
         if(req.session.user.admin === 'admin'){
           res.redirect('/#/admin/home')
         }else{
-          res.redirect('/')
+          res.redirect('/#/profile')
         }
     },
     logout: (req, res) => {

@@ -13,18 +13,19 @@ class TimeSlot extends Component{
     }
 
     componentDidMount(){
-        let {time, date, apptId, user, username} = this.props
+        let {time, date, apptId, user, admin, username} = this.props
         let timeSlot = `${date} ${time}`
         console.log('time format', timeSlot)
         
-        if(user.admin !== 'admin'){
+        if(admin === 'admin'){
+            this.setState({slotInfo: username})
+        }
+        else if(user.admin !== 'admin'){
             if(moment().isAfter(moment(timeSlot, 'MM/DD/YY h:mm A'))){
                 this.setState({slotInfo: 'Past'})
             }else{
                 this.setState({slotInfo: apptId})
             }
-        }else{
-            this.setState({slotInfo: username})
         }
     }
 
@@ -35,7 +36,7 @@ class TimeSlot extends Component{
     }
 
     updateSlotInfo = (apptSummary) => {
-        this.setState({slotInfo: apptSummary.appt_id}, () => {
+        this.setState({slotInfo: apptSummary.user_name}, () => {
             if(this.props.updateHomeToggle){
                 console.log('appt update: ', this.state.slotInfo)
                 this.props.updateHomeToggle()
@@ -101,7 +102,6 @@ class TimeSlot extends Component{
                                     null
                                 }
                         </div>
-                    
                 }
             </div>
         )
