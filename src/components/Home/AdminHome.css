@@ -40,3 +40,39 @@
     height: 720px;
     overflow-y: auto;
 }
+.homeImages{
+    height: 600px;
+    display: flex;
+    justify-content: center;
+
+}
+.clientHomeWrapper{
+    padding-bottom: 140px;
+    padding: 0 100px 140px 100px;
+    box-sizing: border-box;
+    width: 100vw;
+}
+.homeImageWrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%; 
+}
+button.slick-arrow.slick-prev::before {
+    left: 3% !important;
+    z-index: 1;
+    color: #32708F
+  }
+  button.slick-arrow.slick-next::before {
+    right: 3% !important;
+    z-index: 1;
+    color: #32708F;
+  }
+  p.description{
+      width: 60vw;
+      border: #32708F 1px solid;
+      height: 60px;
+      background-color: gainsboro;
+      padding: 3px 5px;
+  }

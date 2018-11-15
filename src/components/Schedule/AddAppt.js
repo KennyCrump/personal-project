@@ -32,7 +32,6 @@ class AddAppt extends Component{
                     window.location = `${REACT_APP_HOME}/#/profile`
                 }
             })
-        
     }
 
     componentDidMount(){
