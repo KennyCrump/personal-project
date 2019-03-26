@@ -16,12 +16,11 @@ class ClientHome extends Component {
     const settings = {
       dots: true,
       infinite: true,
-      fade: true,
       speed: 500,
       slidesToShow: 1,
-      slidesToScroll: 1,
-      className: "slider"
+      slidesToScroll: 1
     };
+    console.log(this.props)
     return (
       <div className="clientHomeWrapper">
         <h1>Welcome To AppointHub</h1>

@@ -56,7 +56,7 @@ class AdminHome extends Component{
     }
 
     render(){
-        console.log("home state: ", this.state);
+        console.log("home state: ", this.props);
         let {usersByDate, apptsByDate, date} = this.state
         let userList = usersByDate.map(user => {
             return  <Link className='linkToUser' to={`/user/${user.user_id}`}>
